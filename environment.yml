@@ -1,0 +1,39 @@
+name: qnas-code
+channels:
+  - pytorch
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip
+  - pytorch:cudatoolkit=11.3
+  - pytorch:torchvision
+  - pytorch:pytorch=1.12.1
+  - pytorch-lightning
+  - torchmetrics
+  - lightning-bolts
+  - scipy
+  - scikit-learn
+  - wandb
+  - conda-build
+  - git
+  - llvmdev ==11.1.0
+  - numpy
+  - pytest
+  - cython
+  - cmake
+  - bzip2
+  - make
+  - pillow
+  - matplotlib
+  - pandas
+  - pip:
+      - torch-pruning
+      - fvcore
+      - numpy-ringbuffer
+      - decorator
+      - attrs
+      - tornado
+      - torchinfo
+      - xgboost
+      - cloudpickle
