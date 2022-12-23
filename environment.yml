@@ -1,4 +1,4 @@
-name: qnas-code
+name: galen
 channels:
   - pytorch
   - defaults

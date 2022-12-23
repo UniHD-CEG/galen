@@ -7,4 +7,4 @@ python -m tools.search_policy \
   --agent independent-single-layer-pruning \
   --episodes 410 \
   --add_search_identifier exp_01a_prune \
-  --alg_config num_workers=6 reward=r6 mixed_reference_bits=6 reward_target_cost_ratio=0.25
+  --alg_config num_workers=6 reward=r6 mixed_reference_bits=6 reward_target_cost_ratio=0.25 tvm_target='tvm.target.arm_cpu("rasp4b")' tvm_device_key=pi-cluster-head-pi4b tvm_rpc_ip=localhost tvm_rpc_port=9000
