@@ -1,4 +1,4 @@
-# Project Galen: Hardware-specific Automatic Compression of Neural Networks
+# Galen: Hardware-specific Automatic Compression of Neural Networks
 
 Galen is a framework for automatic compression of neural networks by applying layer-specific pruning and quantization.
 The layer-wise compression is determined by a RL algorithm which uses the sensitivity but also hardware inference latency as features.
