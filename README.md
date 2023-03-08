@@ -3,7 +3,7 @@
 Galen is a framework for automatic compression of neural networks by applying layer-specific pruning and quantization.
 The layer-wise compression is determined by a RL algorithm which uses the sensitivity but also hardware inference latency as features.
 
-We presented the details of the algorithm at the Practical-LDL workshop collocated with AAAI-23:
+We presented the details of the algorithm at the Practical-DL workshop collocated with AAAI-23:
 [**Towards Hardware-Specific Automatic Compression of Neural Networks**
 ](https://arxiv.org/abs/2212.07818) ([AAAI-23: 2nd International Workshop on Practical
 Deep Learning in the Wild](https://practical-dl.github.io/))
