@@ -12,7 +12,7 @@ Happy to announce that we received the best paper award of this workshop!
 
 **Abstract**:
 
-*Compressing neural network architectures is important to allow the deployment of models to embedded or mobile devices,
+_Compressing neural network architectures is important to allow the deployment of models to embedded or mobile devices,
 and pruning and quantization are the major approaches to compress neural networks nowadays. Both methods benefit when
 compression parameters are selected specifically for each layer. Finding good combinations of compression parameters,
 so-called compression policies, is hard as the problem spans an exponentially large search space. Effective compression
@@ -24,7 +24,7 @@ compression of models specific to a given hardware target. We validate our appro
 learning agents for pruning, quantization and joint pruning and quantization. Besides proving the functionality of our
 approach we were able to compress a ResNet18 for CIFAR-10, on an embedded ARM processor, to 20% of the original
 inference latency without significant loss of accuracy. Moreover, we can demonstrate that a joint search and compression
-using pruning and quantization is superior to an individual search for policies using a single compression method.*
+using pruning and quantization is superior to an individual search for policies using a single compression method._
 
 ![Algorithmic Schema](./figures/alg_schema.drawio.svg)
 
@@ -47,7 +47,7 @@ without hardware feedback you could install using pip:
 
 ```shell
 # CPU build only
-pip install apache-tvm 
+pip install apache-tvm
 ```
 
 #### Manual installation
@@ -69,7 +69,7 @@ cd build
 cmake ..
 
 # -j specifies the number of compile threads
-make -j4 
+make -j4
 ```
 
 To make the TVM python library usable on your system, add the following to your `.bashrc` (or `.zshrc` (...)):
@@ -158,8 +158,15 @@ TVM python package.
 
 - navigate to the above cloned TVM repository on your machine
 - open the file `python/tvm/topi/arm_cpu/bitserial_conv2d.py`
-    - comment out the if statement in line 455 (`if len(kernel.data.shape) == 4:`)
-    - fix indention for line 456 to 467
+  - comment out the if statement in line 455 (`if len(kernel.data.shape) == 4:`)
+  - fix indention for line 456 to 467
 
+# Prune pretrained models
 
+Additional models can be defined at `tools/util/model_provider.py`. Provide a checkpoint file and reference it using the `--ckpt_load_path` argument in the scripts (see `./scripts/search_p_custom.sh`).
 
+In order to prohibit pruning the output layer of the network, specify the frozen layers using the `frozen_layers` algorithm configuration in the scripts (see `./scripts/search_p_custom.sh`)
+
+## Dataset
+
+Currently only cifar10 and imagenet are supported as datasets. More datasets can be added at `./runtime/data/data_provider.py`
