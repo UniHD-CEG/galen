@@ -225,6 +225,8 @@ class TorchMixedQuantizationExecutor(ATorchCompressionExecutor):
                     return False
             return True
         if isinstance(layer_info.module, torch.nn.Conv2d):
+            if layer_info.output_size == []:
+                return False
             min_output_size = min(layer_info.output_size[2], layer_info.output_size[3])
             if min_output_size < 2:
                 return False
