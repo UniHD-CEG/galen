@@ -12,7 +12,7 @@ Happy to announce that we received the best paper award of this workshop!
 
 **Abstract**:
 
-*Compressing neural network architectures is important to allow the deployment of models to embedded or mobile devices,
+_Compressing neural network architectures is important to allow the deployment of models to embedded or mobile devices,
 and pruning and quantization are the major approaches to compress neural networks nowadays. Both methods benefit when
 compression parameters are selected specifically for each layer. Finding good combinations of compression parameters,
 so-called compression policies, is hard as the problem spans an exponentially large search space. Effective compression
@@ -24,7 +24,7 @@ compression of models specific to a given hardware target. We validate our appro
 learning agents for pruning, quantization and joint pruning and quantization. Besides proving the functionality of our
 approach we were able to compress a ResNet18 for CIFAR-10, on an embedded ARM processor, to 20% of the original
 inference latency without significant loss of accuracy. Moreover, we can demonstrate that a joint search and compression
-using pruning and quantization is superior to an individual search for policies using a single compression method.*
+using pruning and quantization is superior to an individual search for policies using a single compression method._
 
 ![Algorithmic Schema](./figures/alg_schema.drawio.svg)
 
@@ -47,7 +47,7 @@ without hardware feedback you could install using pip:
 
 ```shell
 # CPU build only
-pip install apache-tvm 
+pip install apache-tvm
 ```
 
 #### Manual installation
@@ -69,7 +69,7 @@ cd build
 cmake ..
 
 # -j specifies the number of compile threads
-make -j4 
+make -j4
 ```
 
 To make the TVM python library usable on your system, add the following to your `.bashrc` (or `.zshrc` (...)):
@@ -148,6 +148,8 @@ Finally, using the joint agent:
 bash ./scripts/search_pq.sh
 ```
 
+To deactivate measurement of hardware latency, add `enable_latency_eval=False` to the `--alg_config` argument when using the scripts.
+
 [1] https://tvm.apache.org/docs/tutorial/cross_compilation_and_rpc.html
 
 ### Apache-TVM: Missing Property `kernel.data.shape`
@@ -158,8 +160,33 @@ TVM python package.
 
 - navigate to the above cloned TVM repository on your machine
 - open the file `python/tvm/topi/arm_cpu/bitserial_conv2d.py`
-    - comment out the if statement in line 455 (`if len(kernel.data.shape) == 4:`)
-    - fix indention for line 456 to 467
+  - comment out the if statement in line 455 (`if len(kernel.data.shape) == 4:`)
+  - fix indention for line 456 to 467
 
+# Prune Pretrained Models
 
+## Method 1 (preferred)
 
+Define additional models at `tools/util/model_provider.py`. Provide a checkpoint file and reference it using the `--ckpt_load_path` argument when using scripts (see `scripts/search_p_custom_checkpoint.sh`).
+The checkpoint is typically saved using `torch.save(model.state_dict(), PATH)` and contains only the network weights.
+
+## Method 2
+
+Provide a pretrained model and reference it using the `--model` argument when using scripts (see `scripts/search_p_custom_model.sh`).
+The model is typically saved using `torch.save(model, PATH)` and contains the whole model.
+
+## Retrain
+
+Do not forget to retrain your model after pruning using the `scripts/retrain.sh` script. Specify the model using the `--model` argument, the checkpoint using the `--ckpt_load_path` argument and the pruning policy generated during the pruning search using the `--policy` argument.
+
+## Reward function
+
+Multiple reward functions can be specified using e.g the `reward=r6` argument for the R6 reward. For more details, take a look at the definitions at `runtime/agent/reward.py` and the script at `scripts/search_p.sh`.
+
+Specify the `reward_target_cost_ratio=<n>` as a target for model-complexity. A value of 0.25 means, that the algorithm should reduce the model-complexity to 25% of the original model-complexity.
+
+For the reward functions, the beta value can be defined using e.g. the`r6_beta=<n>` argument in case of the R6 reward. A beta value of -5 puts more emphasis on complexity reduction, a value of -1 puts more emphasis on accuracy.
+
+## Dataset
+
+Currently only cifar10 and imagenet are supported as datasets. More datasets can be added at `runtime/data/data_provider.py`.

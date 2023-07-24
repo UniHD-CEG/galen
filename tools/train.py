@@ -208,7 +208,7 @@ if __name__ == '__main__':
         log_file_name=args.log_name
     )
 
-    wandb.init(project=args.wandb_project, entity=args.wandb_entity, config=vars(args),
+    wandb.init(project=args.wandb_project, config=vars(args),
                name=trainer.create_identifier(args.epochs))
 
     protocol = None

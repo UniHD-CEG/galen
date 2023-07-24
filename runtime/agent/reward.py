@@ -14,7 +14,7 @@ class RewardConfig:
         self.r6_beta = float(kwargs.pop("r6_beta", -5.0))
         self.r7_beta = float(kwargs.pop("r7_beta", -5.0))
         self.reward_target_cost_ratio = float(kwargs.pop("reward_target_cost_ratio", 0.5))
-        self.episode_cost_key = kwargs.pop("reward_episode_cost_key", "lat")
+        self.episode_cost_key = kwargs.pop("reward_episode_cost_key", "lat") # Has to be overwritten in scripts with "reward_episode_cost_key=BOPs" if latency evaluation is switched off using "enable_latency_eval=False"
         self.step_cost_key = kwargs.pop("reward_step_cost_key", "BOPs")
         self.acc_key = kwargs.pop("reward_acc_key", "acc")
         self.reward = kwargs.pop("reward", "r6")

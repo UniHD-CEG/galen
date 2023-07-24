@@ -28,7 +28,7 @@ dependencies:
   - matplotlib
   - pandas
   - pip:
-      - torch-pruning
+      - torch-pruning==0.2.8
       - fvcore
       - numpy-ringbuffer
       - decorator

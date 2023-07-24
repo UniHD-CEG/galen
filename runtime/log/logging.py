@@ -161,7 +161,7 @@ class LoggingService:
         for key, value in compression_evaluation.items():
             evaluation[f"{prefix}-{key}"] = value
             if key in self._initial_evaluation:
-                evaluation[f"{prefix}-{key}-ratio"] = value / self._initial_evaluation[key]
+                evaluation[f"{prefix}-{key}-ratio"] = value / self._initial_evaluation[key] # ratio describes which percentage of the original complexity the compressed model has
         return evaluation
 
     @staticmethod

@@ -16,7 +16,11 @@ class ModelInfo:
         key_elements = layer_key.split(".")
 
         if len(key_elements) > 1:
-            parents = {info.var_name: info for info in layer_list if not info.is_leaf_layer}
+            if parent_info.parent_info:
+                parents = {info.var_name: info for info in layer_list if not info.is_leaf_layer and info.parent_info.var_name == parent_info.var_name}
+            else:
+                parents = {info.var_name: info for info in layer_list if not info.is_leaf_layer}
+
             if key_elements[0] in parents:
                 current_info = parents[key_elements[0]]
                 return self._get_info(".".join(key_elements[1:]), current_info.children, full_key, current_info)
