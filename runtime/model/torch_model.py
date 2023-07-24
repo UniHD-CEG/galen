@@ -30,7 +30,8 @@ class TorchModelReference(AModelReference):
         self._layer_dict = {layer_key: module for layer_key, module in self._reference_model.named_modules() if
                             not [*module.children()]}
         last_layer = list(self._layer_dict.keys())[-1]
-        self._frozen_layers["p-lin"].append(last_layer) # disable pruning of last layer
+        if "p-lin" in self._frozen_layers:
+            self._frozen_layers["p-lin"].append(last_layer) # disable pruning of last layer
 
     def all_layer_keys(self) -> list[str]:
         return [*self._layer_dict]
