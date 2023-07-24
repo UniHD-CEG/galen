@@ -7,7 +7,7 @@ from runtime.model.torch_model import TorchModelReference
 class ModelInfo:
 
     def __init__(self, model: TorchModelReference):
-        self.layer_list = torchinfo.summary(model._reference_model, verbose=0).summary_list
+        self.layer_list = torchinfo.summary(model._reference_model, model.batch_input_shape, verbose=0).summary_list
 
     def get_info_for_layer(self, layer_key) -> LayerInfo:
         return self._get_info(layer_key, self.layer_list, layer_key, self.layer_list[0])
