@@ -45,8 +45,7 @@ provider = {
     "test_model": test_model,
     "resnet18_cifar": resnet18_cifar,
     "mobile_net_pretrained": mobile_net_pretrained,
-    "resnet18_pretrained": resnet18_pretrained,
-
+    "resnet18_pretrained": resnet18_pretrained
 }
 
 
