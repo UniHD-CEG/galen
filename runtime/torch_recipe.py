@@ -49,7 +49,7 @@ class TorchConfiguration:
         self.search_identifier = kwargs.pop("search_identifier", "torch-cifar10")
         self.log_dir = kwargs.pop("log_dir", "./logs")
         self.frozen_layers = ast.literal_eval(
-            kwargs.pop("frozen_layers", "{'p-lin': ['fc', 'classifier.1'], 'q-mixed': ['fc', 'classifier.1']}"))
+            kwargs.pop("frozen_layers", "{'p-lin': ['fc'], 'q-mixed': ['fc']}"))
         self.p_channel_round_to = int(kwargs.pop("p_channel_round_to", 1))
         self.num_classes = int(kwargs.pop("num_classes", 10))
 
